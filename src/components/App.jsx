@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 import '../App.css';
-import { experimental_streamedQuery, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import cartIcon from '../images/icon-cart.svg';
+
+// Load all images from the folder automatically
+const allImages = import.meta.glob('../images/*.{png,jpg,jpeg,svg}', { 
+  eager: true, 
+  import: 'default' 
+});
+
+// Helper function to get an image by its filename
+const getImage = (name) => allImages[`../images/${name}`];
 
 
 
@@ -98,7 +108,7 @@ function App() {
               style={{zIndex:'10', transition:'ease-in', transitionDuration: '600ms'}}  
               className={`fixed sm:hidden px-4 py-4 bg-gray-100   ${left === 100 ? 'opacity-70 left-110' : 'opacity-100 left-0'} right-0  top-0 bottom-0`}
             >
-              <img className='py-5 w-5 hover:scale-125' src="./src/images/icon-close.svg" alt="close" />
+              <img className='py-5 w-5 hover:scale-125'  src={getImage('icon-close.svg')} alt="close" />
               <ul>
                 {['Collections', 'Men', 'Women', 'About', 'Contact'].map(item => (
                   <li key={item} className='cursor-pointer py-2 text-lg font-bold hover:scale-95'>{item}</li>
@@ -109,8 +119,8 @@ function App() {
           <header className='relative '>
             <nav style={{zIndex:'9'}} className='nav-bar fixed w-full flex items-center justify-between px-6 md:px-1 py-4  top-0 bg-gray-100  border-gray-200'>
               <div className="flex items-center gap-4">
-                <img onClick={toggleMenue} className='w-7 h-5 sm:hidden cursor-pointer' src="./src/images/icon-menu.svg" alt="menu" />
-                <img className='w-32 h-auto' src="./src/images/logo.svg" alt="logo" />
+                <img onClick={toggleMenue} className='w-7 h-5 sm:hidden cursor-pointer'  src={getImage('icon-menu.svg')} alt="menu" />
+                <img className='w-32 h-auto' src={getImage('logo.svg')} alt="logo" />
                 
                 {/* Desktop and Tablet NavBar : Hidden on mobile, flex on sm and above */}
                 <div className='hidden sm:flex items-center gap-6 ml-8 text-gray-500'>
@@ -124,7 +134,7 @@ function App() {
                 <div className='relative flex flex-col items-center justify-center '>
                   <img 
                   onClick={boxToggle}
-                  className='w-6 sm:w-7 cursor-pointer hover:scale-120 ' src='./src/images/icon-cart.svg' alt="cart" />
+                  className='w-6 sm:w-7 cursor-pointer hover:scale-120 ' src={getImage('icon-cart.svg')} alt="cart" />
                   
                   {showBox ? (
                     <>
@@ -133,7 +143,7 @@ function App() {
                   ) : ''}
 
                 </div>
-                <img className='w-8 sm:w-12 border-2 border-transparent hover:border-orange-400 rounded-full cursor-pointer' src='./src/images/image-avatar.png' alt="avatar" />
+                <img className='w-8 sm:w-12 border-2 border-transparent hover:border-orange-400 rounded-full cursor-pointer' src={getImage('image-avatar.png')} alt="avatar" />
               </div>
             </nav>
           </header>
@@ -154,8 +164,8 @@ function App() {
                     }
                   </div>
                   {/* Nav buttons only on mobile */}
-                  <button onClick={leftSlide} className='sm:hidden absolute top-1/2 -translate-y-1/2 left-4 p-3 bg-white rounded-full shadow-md'><img src="./src/images/icon-previous.svg" alt="prev"/></button>
-                  <button onClick={rightSlide} className='sm:hidden absolute top-1/2 -translate-y-1/2 right-4 p-3 bg-white rounded-full shadow-md'><img src="./src/images/icon-next.svg" alt="next"/></button>
+                  <button onClick={leftSlide} className='sm:hidden absolute top-1/2 -translate-y-1/2 left-4 p-3 bg-white rounded-full shadow-md'><img  src={getImage('icon-previous.svg')} alt="prev"/></button>
+                  <button onClick={rightSlide} className='sm:hidden absolute top-1/2 -translate-y-1/2 right-4 p-3 bg-white rounded-full shadow-md'><img  src={getImage('icon-next.svg')} alt="next"/></button>
                 </div>
                 
                 {/* Thumbnails: Hidden on smallest mobile, shown on tablets and desktops */}
@@ -196,12 +206,12 @@ function App() {
                 {/* Action Buttons: Stack on mobile, side-by-side on tablet/desktop */}
                 <div className='flex flex-col md:flex-row gap-4'>
                   <div className='flex items-center justify-between bg-gray-100 rounded-xl px-4 py-3  md:w-1/3'>
-                    <img onClick={decreaseOfCount} className='cursor-pointer p-2 hover:opacity-50' src='./src/images/icon-minus.svg' alt="minus" />
+                    <img onClick={decreaseOfCount} className='cursor-pointer p-2 hover:opacity-50' src={getImage('icon-minus.svg')} alt="minus" />
                     <span className='font-bold text-lg'>{count}</span>
-                    <img onClick={increaseOfCount} className='cursor-pointer p-2 hover:opacity-50' src='./src/images/icon-plus.svg' alt="plus" />
+                    <img onClick={increaseOfCount} className='cursor-pointer p-2 hover:opacity-50' src={getImage('icon-plus.svg')} alt="plus" />
                   </div>
                   <button onClick={addToCart} className='flex-1 flex items-center justify-center gap-4 cursor-pointer bg-orange-400 hover:bg-orange-300 transition-colors text-white font-bold py-4 rounded-xl  shadow-2xl'>
-                    <img className='brightness-0 invert' src='./src/images/icon-cart.svg' alt="cart" /> 
+                    <img className='brightness-0 invert' src={getImage('icon-cart.svg')} alt="cart" /> 
                     Add to Cart 
                   </button>
                 </div>
@@ -238,9 +248,9 @@ function App() {
                 <p className='text-xl font-bold'>Contacts</p>
                 <div className='flex items-start w-full'>
                   <ul className='flex flex-col gap-4 '>
-                    <li className='flex items-center'><img className='w-10 pr-2' src="./src/images/icon-email.png" alt="" /><a href="">Email: elyasaioby@gmail.com</a></li>
-                    <li className='flex items-center'><img  className='w-10 pr-2' src="./src/images/icon-phone.png" alt="" /><a href="">Phone: 0776004280</a></li>
-                    <li className='flex items-center'><img  className='w-10 pr-2' src="./src/images/icon-facebook.png" alt="" /><a href="">Facebok: Elyas Aioby</a></li>
+                    <li className='flex items-center'><img className='w-10 pr-2' src={getImage('icon-email.png')} alt="" /><a href="">Email: elyasaioby@gmail.com</a></li>
+                    <li className='flex items-center'><img  className='w-10 pr-2' src={getImage('icon-phone.png')} alt="" /><a href="">Phone: 0776004280</a></li>
+                    <li className='flex items-center'><img  className='w-10 pr-2' src={getImage('icon-facebook.png')} alt="" /><a href="">Facebok: Elyas Aioby</a></li>
                     <li className='flex items-center'><a href=""></a></li>
                   </ul>
                 </div>
@@ -279,7 +289,7 @@ const ShoppingBox = ({ existingItems, setExistingItems }) => {
     
       <div className='flex w-full border-b justify-between'>
         <h3 className="font-bold pb-2">Cart</h3>
-        <img onClick={clearAll} className='w-6 h-6 cursor-pointer'  src="./src/images/icon-delete.svg" alt="delete-icon" />
+        <img onClick={clearAll} className='w-6 h-6 cursor-pointer'  src={getImage('icon-delete.svg')}  alt="delete-icon" />
       </div>
         
         {existingItems.length === 0 ? (
@@ -296,7 +306,7 @@ const ShoppingBox = ({ existingItems, setExistingItems }) => {
                   <span className=" font-bold ml-2">${item.price * item.quantity}</span>
                 </p>
               </div>
-              <img  onClick={()=>clearOne(item.id,item.quantity)} className='cursor-pointer' src="./src/images/icon-delete.svg" alt="delte" />
+              <img  onClick={()=>clearOne(item.id,item.quantity)} className='cursor-pointer'  src={getImage('icon-delete.svg')}  alt="delte" />
             </div>
           ) )
         )}
