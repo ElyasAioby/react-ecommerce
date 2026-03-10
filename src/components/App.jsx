@@ -250,7 +250,7 @@ function App() {
                   <ul className='flex flex-col gap-4 '>
                     <li className='flex items-center'><img className='w-10 pr-2' src={getImage('icon-email.png')} alt="" /><a href="">Email: elyasaioby@gmail.com</a></li>
                     <li className='flex items-center'><img  className='w-10 pr-2' src={getImage('icon-phone.png')} alt="" /><a href="">Phone: 0776004280</a></li>
-                    <li className='flex items-center'><img  className='w-10 pr-2' src={getImage('icon-facebook.png')} alt="" /><a href="">Facebok: Elyas Aioby</a></li>
+                    <li className='flex items-center'><img  className='w-10 pr-2' src={getImage('icon-facebook.png')} alt="" /><a href="https://www.facebook.com/elyas.aioby">Facebok: Elyas Aioby</a></li>
                     <li className='flex items-center'><a href=""></a></li>
                   </ul>
                 </div>
